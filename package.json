@@ -1,0 +1,27 @@
+{
+  "name": "spicetify-devtools",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "rspack --mode production",
+    "dev": "rspack --mode development --watch",
+    "typecheck": "tsgo --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^2.0.1",
+    "@rspack/core": "^2.0.1",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@types/chrome": "^0.1.40",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "postcss": "^8.5.13",
+    "postcss-loader": "^8.2.1",
+    "tailwindcss": "^4.2.4",
+    "@typescript/native-preview": "^7.0.0-dev.20260502.1"
+  }
+}
