@@ -19,7 +19,7 @@
     "@types/chrome": "^0.1.42",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "postcss": "^8.5.13",
+    "postcss": "^8.5.14",
     "postcss-loader": "^8.2.1",
     "tailwindcss": "^4.2.4",
     "@typescript/native-preview": "^7.0.0-dev.20260502.1"
