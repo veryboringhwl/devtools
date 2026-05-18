@@ -22,6 +22,6 @@
     "postcss": "^8.5.14",
     "postcss-loader": "^8.2.1",
     "tailwindcss": "^4.2.4",
-    "@typescript/native-preview": "^7.0.0-dev.20260511.1"
+    "@typescript/native-preview": "^7.0.0-dev.20260518.1"
   }
 }
