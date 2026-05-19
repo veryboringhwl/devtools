@@ -9,7 +9,7 @@
         "react-dom": "^19.2.5",
       },
       "devDependencies": {
-        "@rspack/cli": "^2.0.2",
+        "@rspack/cli": "^2.0.3",
         "@rspack/core": "^2.0.1",
         "@tailwindcss/postcss": "^4.2.4",
         "@types/chrome": "^0.1.42",
@@ -69,7 +69,7 @@
 
     "@rspack/binding-win32-x64-msvc": ["@rspack/binding-win32-x64-msvc@2.0.1", "", { "os": "win32", "cpu": "x64" }, "sha512-oPM2Jtm7HOlmxl/aBfleAVlL6t9VeHx6WvEets7BBJMInemFXAQd4CErRqybf7rXutACzLeUWBOue4Jpd1/ykw=="],
 
-    "@rspack/cli": ["@rspack/cli@2.0.2", "", { "peerDependencies": { "@rspack/core": "^2.0.0-0", "@rspack/dev-server": "^2.0.0-0" }, "optionalPeers": ["@rspack/dev-server"], "bin": { "rspack": "bin/rspack.js" } }, "sha512-rwuzo/V59ck/ChNkxMEEjuXLFs8nPJ37K0PMuUeIMmzFJNdUcPLxSV3qaV9azDLGcyq4XwcyQvexH3okWbfUfQ=="],
+    "@rspack/cli": ["@rspack/cli@2.0.3", "", { "peerDependencies": { "@rspack/core": "^2.0.0-0", "@rspack/dev-server": "^2.0.0-0" }, "optionalPeers": ["@rspack/dev-server"], "bin": { "rspack": "bin/rspack.js" } }, "sha512-h/Xbkupx82UaPr5Ye3hNORi5eXmpEGSPri7WkEOrKIcT+Y3h603kujCQziNIPX3G4UURWPiksIArp1GBTF+A9w=="],
 
     "@rspack/core": ["@rspack/core@2.0.1", "", { "dependencies": { "@rspack/binding": "2.0.1" }, "peerDependencies": { "@module-federation/runtime-tools": "^0.24.1 || ^2.0.0", "@swc/helpers": ">=0.5.1" }, "optionalPeers": ["@module-federation/runtime-tools", "@swc/helpers"] }, "sha512-lgfZiExh8kDR/3obgi3RQKwKG5av1Xf5qDN1aVde777W9pbmx0Pqvrww1qtNvJ+gobEjbrrn5HEZWYGe0VLmcA=="],
 
