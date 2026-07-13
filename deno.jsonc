@@ -11,7 +11,7 @@
   "imports": {
     "react": "npm:react@19.2.7",
     "react-dom": "npm:react-dom@19.2.7",
-    "zustand": "npm:zustand@5.0.8",
+    "zustand": "npm:zustand@5.0.14",
     "clsx": "npm:clsx@2.1.1",
     "sonner": "npm:sonner@2.0.3",
     "rolldown": "npm:rolldown@1.1.5",
