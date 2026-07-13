@@ -1,23 +1,22 @@
-let panelWindow: Window | null = null;
-
 chrome.devtools.panels.create("Mapped Elements", "", "panel.html", (panel) => {
-  panel.onShown.addListener((pw) => {
-    panelWindow = pw;
+  panel.onShown.addListener((panelWindow: Window) => {
+    (window as unknown as Record<string, unknown>).__panelWindow = panelWindow;
   });
 
   panel.onHidden.addListener(() => {
-    panelWindow = null;
+    (window as unknown as Record<string, unknown>).__panelWindow = null;
   });
 
-  panel.onSearch.addListener((action, queryString) => {
-    if (panelWindow) {
-      panelWindow.postMessage(
+  panel.onSearch.addListener((action: string, queryString?: string) => {
+    const pw = (window as unknown as Record<string, Window | null>).__panelWindow;
+    if (pw) {
+      pw.postMessage(
         {
           source: "devtools-command",
           action,
-          query: queryString || "",
+          query: queryString || ""
         },
-        "*",
+        "*"
       );
     }
   });

@@ -1,0 +1,39 @@
+{
+  "tasks": {
+    "build": "deno x rolldown -c rolldown.config.ts",
+    "fmt": "deno run -A npm:oxfmt -c .oxfmtrc.json",
+    "lint": "deno run -A npm:oxlint -c .oxlintrc.json",
+    "check": "deno check",
+    "release": {
+      "dependencies": ["fmt", "lint", "check"]
+    }
+  },
+  "imports": {
+    "react": "npm:react@19.2.7",
+    "react-dom": "npm:react-dom@19.2.7",
+    "zustand": "npm:zustand@5.0.8",
+    "clsx": "npm:clsx@2.1.1",
+    "sonner": "npm:sonner@2.0.3",
+    "rolldown": "npm:rolldown@1.1.5",
+    "@tailwindcss/postcss": "npm:@tailwindcss/postcss@4.3.2",
+    "@types/chrome": "npm:@types/chrome@0.2.0",
+    "@types/react": "npm:@types/react@19.2.17",
+    "@types/react-dom": "npm:@types/react-dom@19.2.3",
+    "postcss": "npm:postcss@8.5.15",
+    "tailwindcss": "npm:tailwindcss@4.3.2"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "strict": true,
+    "types": ["npm:@types/chrome"],
+    "lib": ["DOM", "ESNext", "deno.ns"]
+  },
+  "nodeModulesDir": "auto",
+  "lint": {
+    "exclude": ["**/*"]
+  },
+  "format": {
+    "exclude": ["**/*"]
+  },
+  "minimumDependencyAge": "0"
+}

@@ -1,108 +1,157 @@
-export const BACKEND_SCRIPT = `;(function () {
-  if (window.__EXT_DEVTOOLS__) return
+interface SerializedNode {
+  type: string;
+  id: number;
+  tag?: string;
+  val?: string;
+  name?: string;
+  attrs?: Record<string, string>;
+  children?: SerializedNode[];
+}
 
-  window.__EXT_DEVTOOLS__ = {
+interface DevToolsAPI {
+  nextId: number;
+  nodeToId: Map<Node, number>;
+  idToNode: Map<number, Node>;
+  mutations: boolean;
+  observer: MutationObserver | null;
+  init(): void;
+  getId(node: Node): number;
+  serializeAttributes(el: Element): Record<string, string>;
+  serializeNode(node: Node): SerializedNode | null;
+  getDOM(): SerializedNode | null;
+  checkMutations(): boolean;
+  highlightNode(id: number): void;
+  clearHighlight(): void;
+}
+
+declare global {
+  interface Window {
+    __EXT_DEVTOOLS__: DevToolsAPI;
+  }
+}
+
+if (!window.__EXT_DEVTOOLS__) {
+  const api: DevToolsAPI = {
     nextId: 1,
-    nodeToId: new Map(),
-    idToNode: new Map(),
+    nodeToId: new Map<Node, number>(),
+    idToNode: new Map<number, Node>(),
     mutations: false,
     observer: null,
 
-    init: function () {
-      if (this.observer) return
-      this.observer = new MutationObserver(function () {
-        window.__EXT_DEVTOOLS__.mutations = true
-      })
+    init() {
+      if (this.observer) return;
+      this.observer = new MutationObserver(() => {
+        api.mutations = true;
+      });
       this.observer.observe(document.documentElement, {
         childList: true,
         attributes: true,
         subtree: true,
-        characterData: true,
-      })
+        characterData: true
+      });
     },
 
-    getId: function (node) {
-      if (this.nodeToId.has(node)) return this.nodeToId.get(node)
-      var id = this.nextId++
-      this.nodeToId.set(node, id)
-      this.idToNode.set(id, node)
-      return id
+    getId(node: Node): number {
+      const existing = this.nodeToId.get(node);
+      if (existing !== undefined) return existing;
+      const id = this.nextId++;
+      this.nodeToId.set(node, id);
+      this.idToNode.set(id, node);
+      return id;
     },
 
-    serializeAttributes: function (el) {
-      var attrs = {}
-      for (var i = 0; i < el.attributes.length; i++) {
-        var attr = el.attributes[i]
-        attrs[attr.name] = attr.value
+    serializeAttributes(el: Element): Record<string, string> {
+      const attrs: Record<string, string> = {};
+      for (let i = 0; i < el.attributes.length; i++) {
+        const attr = el.attributes[i];
+        if (attr) {
+          attrs[attr.name] = attr.value;
+        }
       }
-      return attrs
+      return attrs;
     },
 
-    serializeNode: function (node) {
+    serializeNode(node: Node): SerializedNode | null {
       if (node.nodeType === 3) {
-        var text = (node.nodeValue || "").trim()
-        if (!text) return null
-        return { type: "text", val: text, id: this.getId(node) }
+        const text = (node.nodeValue || "").trim();
+        if (!text) return null;
+        return { type: "text", val: text, id: this.getId(node) };
       }
       if (node.nodeType === 8) {
-        return { type: "comment", val: node.nodeValue, id: this.getId(node) }
+        return { type: "comment", val: node.nodeValue || "", id: this.getId(node) };
       }
       if (node.nodeType === 10) {
-        return { type: "doctype", name: node.name, id: this.getId(node) }
+        return {
+          type: "doctype",
+          name: (node as DocumentType).name,
+          id: this.getId(node)
+        };
       }
       if (node.nodeType === 1 || node.nodeType === 9 || node.nodeType === 11) {
-        var rawChildren = Array.from(node.childNodes || [])
-        if (node.shadowRoot) rawChildren.push(node.shadowRoot)
-        if (node.contentDocument) rawChildren.push(node.contentDocument)
+        const el = node as Element | Document | DocumentFragment;
+        const rawChildren: Node[] = Array.from(el.childNodes);
+
+        if ("shadowRoot" in el && el.shadowRoot) {
+          rawChildren.push(el.shadowRoot);
+        }
+        if ("contentDocument" in el && (el as HTMLIFrameElement).contentDocument) {
+          rawChildren.push((el as HTMLIFrameElement).contentDocument!);
+        }
 
         return {
           type: "element",
           tag: (node.nodeName || "DOCUMENT").toLowerCase(),
-          attrs: node.nodeType === 1 ? this.serializeAttributes(node) : {},
-          children: rawChildren.map(function (c) { return window.__EXT_DEVTOOLS__.serializeNode(c) }).filter(Boolean),
-          id: this.getId(node),
-        }
+          attrs: node.nodeType === 1 ? this.serializeAttributes(node as Element) : {},
+          children: rawChildren
+            .map((c) => api.serializeNode(c))
+            .filter((n): n is SerializedNode => n !== null),
+          id: this.getId(node)
+        };
       }
-      return null
+      return null;
     },
 
-    getDOM: function () {
-      this.init()
-      this.mutations = false
-      return this.serializeNode(document)
+    getDOM(): SerializedNode | null {
+      this.init();
+      this.mutations = false;
+      return this.serializeNode(document);
     },
 
-    checkMutations: function () {
+    checkMutations(): boolean {
       if (this.mutations) {
-        this.mutations = false
-        return true
+        this.mutations = false;
+        return true;
       }
-      return false
+      return false;
     },
 
-    highlightNode: function (id) {
-      this.clearHighlight()
-      var node = this.idToNode.get(id)
-      if (!node || node.nodeType !== 1) return
+    highlightNode(id: number): void {
+      this.clearHighlight();
+      const node = this.idToNode.get(id);
+      if (!node || node.nodeType !== 1) return;
 
-      var rect = node.getBoundingClientRect()
-      var overlay = document.createElement("div")
-      overlay.id = "__ext_devtools_overlay__"
-      overlay.style.position = "fixed"
-      overlay.style.top = rect.top + "px"
-      overlay.style.left = rect.left + "px"
-      overlay.style.width = rect.width + "px"
-      overlay.style.height = rect.height + "px"
-      overlay.style.backgroundColor = "rgba(111, 168, 220, 0.5)"
-      overlay.style.outline = "2px solid rgba(147, 196, 125, 0.8)"
-      overlay.style.zIndex = "2147483647"
-      overlay.style.pointerEvents = "none"
-      document.body.appendChild(overlay)
+      const el = node as Element;
+      const rect = el.getBoundingClientRect();
+
+      const overlay = document.createElement("div");
+      overlay.id = "__ext_devtools_overlay__";
+      overlay.style.position = "fixed";
+      overlay.style.top = `${rect.top}px`;
+      overlay.style.left = `${rect.left}px`;
+      overlay.style.width = `${rect.width}px`;
+      overlay.style.height = `${rect.height}px`;
+      overlay.style.backgroundColor = "rgba(111, 168, 220, 0.5)";
+      overlay.style.outline = "2px solid rgba(147, 196, 125, 0.8)";
+      overlay.style.zIndex = "2147483647";
+      overlay.style.pointerEvents = "none";
+      document.body.appendChild(overlay);
     },
 
-    clearHighlight: function () {
-      var existing = document.getElementById("__ext_devtools_overlay__")
-      if (existing) existing.remove()
-    },
-  }
-})()`;
+    clearHighlight(): void {
+      const existing = document.getElementById("__ext_devtools_overlay__");
+      if (existing) existing.remove();
+    }
+  };
+
+  window.__EXT_DEVTOOLS__ = api;
+}

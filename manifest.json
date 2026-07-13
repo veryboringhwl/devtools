@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Spicetify Developer Tools",
   "description": "Adds deobfuscated class names to the CEF Developer Tools.",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "minimum_chrome_version": "145",
   "devtools_page": "main.html",
   "permissions": ["storage", "tabs"],
