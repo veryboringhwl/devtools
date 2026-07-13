@@ -2,8 +2,8 @@
   "version": "5",
   "specifiers": {
     "npm:@tailwindcss/postcss@4.3.2": "4.3.2",
-    "npm:@types/chrome@*": "0.2.0",
-    "npm:@types/chrome@0.2.0": "0.2.0",
+    "npm:@types/chrome@*": "0.2.2",
+    "npm:@types/chrome@0.2.2": "0.2.2",
     "npm:@types/react-dom@19.2.3": "19.2.3_@types+react@19.2.17",
     "npm:@types/react@19.2.17": "19.2.17",
     "npm:clsx@2.1.1": "2.1.1",
@@ -262,8 +262,8 @@
         "tslib"
       ]
     },
-    "@types/chrome@0.2.0": {
-      "integrity": "sha512-K/i7EKEVSpmyXXjE0ev5oASWBYMY6yM8LFSutG2PkM1DmxJUggZsoaTc0W1RsVwDDKrsZEjpHFAbqqxlRxGsSg==",
+    "@types/chrome@0.2.2": {
+      "integrity": "sha512-8rSMZ4cvo2xmaSyQg0sN5yRL7oiDkntLoiHxUhfwQnv1mvnkrdoZ25SlNrKWmYKaeP50WvrfWj1pmc02+U9KKw==",
       "dependencies": [
         "@types/filesystem",
         "@types/har-format"
@@ -484,7 +484,7 @@
     "dependencies": [
       "npm:@tailwindcss/postcss@4.3.2",
       "npm:@types/chrome@*",
-      "npm:@types/chrome@0.2.0",
+      "npm:@types/chrome@0.2.2",
       "npm:@types/react-dom@19.2.3",
       "npm:@types/react@19.2.17",
       "npm:clsx@2.1.1",
