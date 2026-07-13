@@ -11,7 +11,7 @@
     "npm:react-dom@19.2.7": "19.2.7_react@19.2.7",
     "npm:react@19.2.7": "19.2.7",
     "npm:rolldown@1.1.5": "1.1.5",
-    "npm:sonner@2.0.3": "2.0.3_react@19.2.7_react-dom@19.2.7__react@19.2.7",
+    "npm:sonner@2.0.7": "2.0.7_react@19.2.7_react-dom@19.2.7__react@19.2.7",
     "npm:tailwindcss@4.3.2": "4.3.2",
     "npm:zustand@5.0.14": "5.0.14_@types+react@19.2.17_react@19.2.7"
   },
@@ -449,8 +449,8 @@
     "scheduler@0.27.0": {
       "integrity": "sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q=="
     },
-    "sonner@2.0.3_react@19.2.7_react-dom@19.2.7__react@19.2.7": {
-      "integrity": "sha512-njQ4Hht92m0sMqqHVDL32V2Oun9W1+PHO9NDv9FHfJjT3JT22IG4Jpo3FPQy+mouRKCXFWO+r67v6MrHX2zeIA==",
+    "sonner@2.0.7_react@19.2.7_react-dom@19.2.7__react@19.2.7": {
+      "integrity": "sha512-W6ZN4p58k8aDKA4XPcx2hpIQXBRAgyiWVkYhT7CvK6D3iAu7xjvVyhQHg2/iaKJZ1XVJ4r7XuwGL+WGEK37i9w==",
       "dependencies": [
         "react",
         "react-dom"
@@ -492,7 +492,7 @@
       "npm:react-dom@19.2.7",
       "npm:react@19.2.7",
       "npm:rolldown@1.1.5",
-      "npm:sonner@2.0.3",
+      "npm:sonner@2.0.7",
       "npm:tailwindcss@4.3.2",
       "npm:zustand@5.0.14"
     ]
