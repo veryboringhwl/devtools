@@ -13,7 +13,7 @@
     "react-dom": "npm:react-dom@19.2.7",
     "zustand": "npm:zustand@5.0.8",
     "clsx": "npm:clsx@2.1.1",
-    "sonner": "npm:sonner@2.0.3",
+    "sonner": "npm:sonner@2.0.7",
     "rolldown": "npm:rolldown@1.1.5",
     "@tailwindcss/postcss": "npm:@tailwindcss/postcss@4.3.2",
     "@types/chrome": "npm:@types/chrome@0.2.0",
