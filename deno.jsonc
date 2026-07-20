@@ -14,7 +14,7 @@
     "zustand": "npm:zustand@5.0.14",
     "clsx": "npm:clsx@2.1.1",
     "sonner": "npm:sonner@2.0.7",
-    "rolldown": "npm:rolldown@1.1.5",
+    "rolldown": "npm:rolldown@1.2.0",
     "@tailwindcss/postcss": "npm:@tailwindcss/postcss@4.3.2",
     "@types/chrome": "npm:@types/chrome@0.2.2",
     "@types/react": "npm:@types/react@19.2.17",
