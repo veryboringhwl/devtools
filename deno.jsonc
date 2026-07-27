@@ -9,7 +9,7 @@
     }
   },
   "imports": {
-    "react": "npm:react@19.2.7",
+    "react": "npm:react@19.2.8",
     "react-dom": "npm:react-dom@19.2.7",
     "zustand": "npm:zustand@5.0.14",
     "clsx": "npm:clsx@2.1.1",
